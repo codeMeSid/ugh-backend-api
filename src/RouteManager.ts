@@ -43,7 +43,7 @@ export class RouteManager {
           method,
           doc: text,
           isProtected,
-          responseStructure: { success: true, ...responseStructure },
+          responseStructure: { success: true, result: responseStructure },
           queryParameters,
           requestBody,
         });
