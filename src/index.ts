@@ -16,11 +16,11 @@ import { shopRoutes } from "./routes/shopRoutes";
 import { tournamentRoutes } from "./routes/tournamentRoutes";
 import { authRoutes } from "./routes/authRoutes";
 import { apiTemplateController } from "./utils/apiTemplateController";
+import { matchRoutes } from "./routes/matchRoutes";
 
 // TODO implement logger
 // TODO user request logger
 // TODO user access - header x-access-token
-// TODO api doc template
 (async () => {
   try {
     // declarations
@@ -37,11 +37,12 @@ import { apiTemplateController } from "./utils/apiTemplateController";
     app.use(requestQueryToJson());
     app.use(responseInJson());
     // domain routes
-    routeManager.registerDomain("test", testRoutes);
-    routeManager.registerDomain("auth", authRoutes);
-    routeManager.registerDomain("user", userRoutes);
-    routeManager.registerDomain("shop", shopRoutes);
-    routeManager.registerDomain("tournament", tournamentRoutes);
+    routeManager.registerDomain("test", testRoutes); // all test and mock data operation routes
+    routeManager.registerDomain("auth", authRoutes); // all auth opeartion routes
+    routeManager.registerDomain("user", userRoutes); // all user operation routes
+    routeManager.registerDomain("shop", shopRoutes); // all money operation routes
+    routeManager.registerDomain("tournament", tournamentRoutes); // all tournament operation routes
+    routeManager.registerDomain("match", matchRoutes); // all in tournament match operation routes
     app.use(`/api/sb/${config.DOMAIN}`, routeManager.generateDomainRoutes());
     app.get(
       "/api-document",

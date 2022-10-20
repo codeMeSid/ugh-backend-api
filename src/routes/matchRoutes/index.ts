@@ -1,3 +1,3 @@
 import { ApiRoute } from "../../types/ApiRoute";
 
-export const testRoutes: Array<ApiRoute> = [];
+export const matchRoutes: Array<ApiRoute> = [];
