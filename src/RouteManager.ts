@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { config } from "./config";
 import { ApiRoute } from "./types/ApiRoute";
 import { Domain } from "./types/Domain";
 
@@ -36,7 +37,7 @@ export class RouteManager {
             isProtected,
           },
         } = apiRoute;
-        const constructedUrl = `${domainName}${url}`;
+        const constructedUrl = `/api/sb/${config.DOMAIN}/${domainName}${url}`;
 
         domainRoutes.push({
           url: constructedUrl,
