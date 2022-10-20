@@ -1,0 +1,99 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script>
+      console.log({{{json routes}}});
+    </script>
+  </head>
+  <body>
+    {{!-- <pre>{{json routes}}</pre> --}}
+    <div class="container-xxl">
+      <div class="accordion mt-5">
+        {{#each routes}}
+          <div class="accordion-item">
+            <h1 class="accordion-header">
+              <button
+                class="accordion-button text-capitalize"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#{{this.domain}}-panel"
+                aria-expanded="true"
+                aria-controls="{{this.domain}}-panel"
+              >
+                {{this.domain}}
+                ({{this.routes.length}}
+                routes)
+              </button>
+            </h1>
+            <div
+              id="{{this.domain}}-panel"
+              class="accordion-collapse collapse show"
+            >
+              <div class="accordion-body">
+                {{#each this.routes}}
+                  <div class="card">
+                    <h5 class="card-header">
+                      <div
+                        class="badge bg-{{getMethodColor this.method}}
+                          text-uppercase"
+                      >{{this.method}}</div>
+                      &nbsp;/{{this.url}}
+
+                    </h5>
+                    <div class="card-body">
+                      <code>{{this.doc}}</code>
+                      <div class="mt-3">
+                        <var>Access:</var>
+                        {{#if this.isProtected}}
+                          <div class="badge bg-danger">PROTECTED FOR SIGNED IN
+                            USER</div>
+                        {{else}}
+                          <div class="badge bg-success">OPEN TO ANY</div>
+                        {{/if}}
+                      </div>
+                      {{#if this.queryParameters}}
+                        <div class="p-2 mt-3 bg-light">
+                          <strong>Query Parameters</strong>
+                          <pre class="m-0 mt-2">{{json
+                              this.queryParameters
+                            }}</pre>
+                        </div>
+                      {{/if}}
+                      {{#if this.requestBody}}
+                        <div class="p-2 mt-3 bg-light">
+                          <strong>Request Body</strong>
+                          <pre class="m-0 mt-2">{{json this.requestBody}}</pre>
+                        </div>
+                      {{/if}}
+                      <div class="p-2 mt-3 bg-light">
+                        <strong>Response</strong>
+                        <pre class="m-0 mt-2">{{json
+                            this.responseStructure
+                          }}</pre>
+                      </div>
+                    </div>
+                  </div>
+                {{/each}}
+
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

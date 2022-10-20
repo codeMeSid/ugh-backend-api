@@ -1,0 +1,7 @@
+node_modules
+build
+dest
+yarn-error.log
+admin_api_routes.json
+player_api_routes.json
+api_doc
