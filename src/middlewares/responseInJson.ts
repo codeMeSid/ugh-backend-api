@@ -9,7 +9,7 @@ export const responseInJson = (): Controller => (req, res, nextFunc) => {
       delete data.success;
       res.statusCode = 400;
     }
-    return res.json({ success, result: data.payload });
+    return res.json({ success, result: data });
   };
   nextFunc();
 };
