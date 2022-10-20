@@ -2,7 +2,7 @@ import { ApiRoute } from "../../types/ApiRoute";
 
 export const testRoutes: Array<ApiRoute> = [
   {
-    url: "health-check",
+    url: "/health-check",
     method: "get",
     middlewares: [],
     controller: (req, res) => {

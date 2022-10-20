@@ -9,6 +9,8 @@ COPY . .
 
 EXPOSE 4000
 
+ENV DOMAIN=ugh
+
 # Building app
 RUN npm run build
 
