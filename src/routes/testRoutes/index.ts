@@ -10,7 +10,7 @@ export const testRoutes: Array<ApiRoute> = [
     },
     doc: {
       responseStructure: { msg: "Healthy" },
-      text: "Just a api health check api",
+      text: "Just a health check api",
     },
   },
 ];

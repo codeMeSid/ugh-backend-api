@@ -10,8 +10,33 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+    >
+    </script>
     <script>
-      console.log({{{json routes}}});
+      async function request(url){ 
+        const routeData = {{{json routes}}};
+        let route;
+        routeData.forEach(({routes})=>{
+          routes.forEach(r=>{
+            if(r.url === url)route=r;
+          })
+        })
+        if(route){
+          const el = document.getElementById(route.url)
+          const containerEl =document.getElementById(route.url+"-container")
+          containerEl.style="display:block";
+          try{
+          const cUrl = window.location.origin + route.url
+          const response = await axios[route.method](cUrl,route.requestBody)
+          el.innerHTML = `<pre>${JSON.stringify(response.data,null,2)}</pre>`
+          }
+          catch(error){
+            el.innerHTML = JSON.stringify({success:false,result:{errors:[{message:error.message}]}  })
+          }
+        }
+       }
     </script>
   </head>
   <body>
@@ -41,13 +66,20 @@
               <div class="accordion-body">
                 {{#each this.routes}}
                   <div class="card">
-                    <h5 class="card-header">
-                      <div
-                        class="badge bg-{{getMethodColor this.method}}
-                          text-uppercase"
-                      >{{this.method}}</div>
-                      &nbsp;{{this.url}}
-
+                    <h5
+                      class="card-header d-flex align-items-center justify-content-between"
+                    >
+                      <div>
+                        <div
+                          class="badge bg-{{getMethodColor this.method}}
+                            text-uppercase"
+                        >{{this.method}}</div>
+                        &nbsp;{{this.url}}</div>
+                      <button
+                        type="button"
+                        class="btn btn-light btn-sm"
+                        onclick="request('{{url}}')"
+                      >Try API</button>
                     </h5>
                     <div class="card-body">
                       <code>{{this.doc}}</code>
@@ -61,7 +93,7 @@
                         {{/if}}
                       </div>
                       {{#if this.queryParameters}}
-                        <div class="p-2 mt-3 bg-light">
+                        <div class="p-2 pb-0 mt-3 bg-light">
                           <strong>Query Parameters</strong>
                           <pre class="m-0 mt-2">{{json
                               this.queryParameters
@@ -69,16 +101,21 @@
                         </div>
                       {{/if}}
                       {{#if this.requestBody}}
-                        <div class="p-2 mt-3 bg-light">
+                        <div class="p-2 pb-0 mt-3 bg-light">
                           <strong>Request Body</strong>
                           <pre class="m-0 mt-2">{{json this.requestBody}}</pre>
                         </div>
                       {{/if}}
-                      <div class="p-2 mt-3 bg-light">
+                      <div class="p-2 pb-0 mt-3 bg-light">
                         <strong>Response</strong>
-                        <pre class="m-0 mt-2">{{json
+                        <pre class="m-0 mt-2" >{{json
                             this.responseStructure
-                          }}</pre>
+                          }}
+                        </pre>
+                      </div>
+                       <div id="{{this.url}}-container" style="display:none ;" class="p-2 mt-3 bg-light">
+                        <strong>Response Live</strong>
+                        <div class="m-0 mt-2" style="min-height:100px ;" id="{{this.url}}"></div>
                       </div>
                     </div>
                   </div>
