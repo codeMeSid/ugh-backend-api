@@ -12,6 +12,6 @@ export interface ApiRoute {
     isProtected?: boolean;
     requestBody?: Object;
     queryParameters?: Object;
-    responseStructure: Object;
+    responseStructure?: Object;
   };
 }

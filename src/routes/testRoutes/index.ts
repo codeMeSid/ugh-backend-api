@@ -9,7 +9,7 @@ export const testRoutes: Array<ApiRoute> = [
       res.json({ msg: "Healthy Api" });
     },
     doc: {
-      responseStructure: { msg: "Healthy" },
+      responseStructure: { msg: "string" },
       text: "Just a health check api",
     },
   },
