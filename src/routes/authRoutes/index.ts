@@ -37,7 +37,7 @@ export const authRoutes: Array<ApiRoute> = [
         ughId,
         otp: newUserOtp,
       });
-      newUser.specialId = generatorKey.generateSpecialId("U-", newUser.id);
+      newUser.specialId = generatorKey.generateSpecialId("U", newUser.id);
       await newUser.save();
       await smsService.sendOTP(mobile, newUserOtp);
       res.json({ specialId: newUser.specialId });

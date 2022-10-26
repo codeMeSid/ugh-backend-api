@@ -21,7 +21,8 @@ class GeneratorKey {
     return Math.floor(randNum);
   }
   generateSpecialId(domain: string, id: string) {
-    return domain + this.colorHash.hex(id).substring(1);
+    const userColor = this.colorHash.hex(id).substring(1).toUpperCase();
+    return domain + "-" + userColor + "-" + this.generateOTP(7);
   }
 }
 
