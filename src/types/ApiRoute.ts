@@ -1,4 +1,3 @@
-import { USER_ROLE } from "../enums/USER_ROLE";
 import { Controller } from "./Controller";
 
 export interface ApiRoute {

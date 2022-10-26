@@ -21,7 +21,7 @@ export const config = convict({
   MONGO_URI: {
     doc: "Connection URI for Mongo DB",
     default:
-      "mongodb+srv://siddhant:tAOdBjJMrQd97RbY@ugh.0clqp.mongodb.net/ugh-manager",
+      "mongodb+srv://siddhant:tAOdBjJMrQd97RbY@ugh.0clqp.mongodb.net/ugh-manager-sid",
     arg: "MONGO_URI",
     env: "MONGO_URI",
   },
@@ -30,5 +30,29 @@ export const config = convict({
     default: "EF30AF027215E56C7EA776D36CAB269CDC4F1DD98B393DB445D14FC0B5001BC6",
     arg: "ENCRYPTION_KEY",
     env: "ENCRYPTION_KEY",
+  },
+  AGE_LIMIT: {
+    doc: "Minimum age for users to register",
+    default: 12,
+    arg: "AGE_LIMIT",
+    env: "AGE_LIMIT",
+  },
+  TWILIO_SID: {
+    doc: "twilio sid",
+    default: "AC41f1c477160f30840b39d8ccaa4fd7bf",
+    arg: "TWILIO_SID",
+    env: "TWILIO_SID",
+  },
+  TWILIO_AUTH: {
+    doc: "twilio auth key",
+    default: "b9dc76b8c2447b4fb30ba2e0afeb546c",
+    arg: "TWILIO_AUTH",
+    env: "TWILIO_AUTH",
+  },
+  TWILIO_NUMBER: {
+    doc: "twilio mobile number",
+    default: "8087553363",
+    arg: "TWILIO_NUMBER",
+    env: "TWILIO_NUMBER",
   },
 }).getProperties();

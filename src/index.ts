@@ -1,5 +1,5 @@
 import "express-async-errors";
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import compression from "compression";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -48,6 +48,12 @@ import { matchRoutes } from "./routes/matchRoutes";
       "/api-document",
       apiTemplateController(routeManager.getRouteData())
     );
+    app.use((error: Error, _: any, res: Response, __: any) => {
+      res.json({
+        success: false,
+        result: { errors: [{ message: error.message }] },
+      });
+    });
     // services
     mongoose.connect(config.MONGO_URI, (err) => {
       if (!err) {

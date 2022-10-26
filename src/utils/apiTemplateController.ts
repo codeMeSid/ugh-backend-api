@@ -1,4 +1,4 @@
-import { USER_ROLE } from "../enums/USER_ROLE";
+import { USER_ROLES } from "../enums/USER_ROLES";
 
 export const apiTemplateController = (routes: any) => (req: any, res: any) =>
   res.render("api", {

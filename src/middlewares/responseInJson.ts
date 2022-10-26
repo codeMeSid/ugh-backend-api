@@ -7,7 +7,7 @@ export const responseInJson = (): Controller => (req, res, nextFunc) => {
     const success = !("success" in data);
     if (!success) {
       delete data.success;
-      res.statusCode = 400;
+      // res.statusCode = 400;
     }
     return res.json({ success, result: data });
   };
