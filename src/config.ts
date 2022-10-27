@@ -45,7 +45,7 @@ export const config = convict({
   },
   TWILIO_AUTH: {
     doc: "twilio auth key",
-    default: "b9dc76b8c2447b4fb30ba2e0afeb546c",
+    default: "edd84a568cc01f2e3afc65c91bc8a8ba",
     arg: "TWILIO_AUTH",
     env: "TWILIO_AUTH",
   },

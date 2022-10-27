@@ -16,6 +16,7 @@ interface UserAttrs {
   email: string;
   password: string;
   otp: number;
+  mobile: string;
 }
 interface UserDoc {
   role: USER_ROLES;
@@ -201,9 +202,9 @@ const Users = new ModelCreator("users").create<UserAttrs, UserDoc>(
     },
   },
   (attrs) => {
-    const { name, dob, email, password, ughId, otp } = attrs;
+    const { name, dob, email, password, ughId, otp, mobile } = attrs;
     const data = {
-      profile: { name, dob, email, ughId },
+      profile: { name, dob, email, ughId, mobile },
       password,
       verification: {
         account: { otp, otpExpireBy: dayjs().add(15, "minutes").toDate() },
